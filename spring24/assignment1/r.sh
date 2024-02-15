@@ -39,7 +39,7 @@ echo "Execute the program"
 chmod +x learn.out
 
 # Uncomment the second line and comment out the first line to test output
-./learn.out
-# echo -e "Code Goblin\nADC\n15.7\n42.6\n19.2\n53.9\n28.2\n64.9" | ./learn.out
+# ./learn.out
+echo -e "Code Goblin\e\nADC\e\n15.7\n42.6\n19.2\n53.9\n28.2\n64.9\n" | ./learn.out
 
 echo "This bash script will now terminate."

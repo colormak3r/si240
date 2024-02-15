@@ -263,13 +263,13 @@ average:
 
   ; Output total time
   mov     rax, 1
-  mov     rdi, output_average_speed       ; The average speed during this trip is %lf mph.
+  mov     rdi, output_total_time          ; The time of the trip is %lf hours.
   movsd   xmm0, xmm15
   call    printf
 
   ; Output average speed
   mov     rax, 1
-  mov     rdi, output_total_time          ; The time of the trip is %lf hours.
+  mov     rdi, output_average_speed       ; The average speed during this trip is %lf mph.
   movsd   xmm0, xmm13
   call    printf 
 
