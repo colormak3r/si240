@@ -26,8 +26,11 @@
 
 # For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
-echo "Assemble the source file valid_stack.asm"
-nasm -f elf64 -l valid_stack.lis -o valid_stack.o valid_stack.asm
+echo "Assemble the source file manager.asm"
+nasm -f elf64 -l manager.lis -o manager.o manager.asm
+
+echo "Assemble the source file input_array.asm"
+nasm -f elf64 -l input_array.lis -o input_array.o input_array.asm
 
 echo "Assemble the source file isfloat.asm"
 nasm -f elf64 -l isfloat.lis -o isfloat.o isfloat.asm
@@ -36,7 +39,7 @@ echo "Compile the source file driver.c"
 gcc  -m64 -Wall -no-pie -o driver.o -std=c2x -c driver.c
 
 echo "Link the object modules to create an executable file"
-gcc -m64 -no-pie -o learn.out isfloat.o valid_stack.o driver.o -std=c2x -Wall -z noexecstack -lm
+gcc -m64 -no-pie -o learn.out input_array.o manager.o driver.o isfloat.o -std=c2x -Wall -z noexecstack -lm
 
 echo "Execute the program"
 chmod +x learn.out
