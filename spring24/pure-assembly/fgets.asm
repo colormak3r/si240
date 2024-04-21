@@ -1,10 +1,12 @@
-global strlen
-max_length equ 1024
+global fgets
+extern strlen
+extern fputs
 
 section .data
+    debug db 10, 0
 section .bss
 section .text
-strlen:
+fgets:
     push    rbp
     mov     rbp, rsp
     push    rbx
@@ -23,22 +25,14 @@ strlen:
     pushf
 
     ; Parameters
-    mov     r15, rdi
+    mov     r15, rdi    
+    mov     r14, rsi
 
-    xor     r14, r14
-
-count:
-    cmp     byte[r15 + r14], 0
-    je      exit
-
-    inc     r14
-    cmp     r14, max_length
-    je      exit
-
-    jmp     count
-
-exit:
-    mov     rax, r14
+    mov     rax, 0
+    mov     rdi, 0
+    mov     rsi, r15
+    mov     rdx, r14
+    syscall
 
     popf          
     pop     r15

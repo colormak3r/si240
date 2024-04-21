@@ -1,25 +1,28 @@
 global _start
+extern strlen
+extern fputs
+extern fgets
+extern atof
+
+max_length equ 256
 
 section .data
-    msg_welcome     db "Welcome to Marvelous Marvin’s Area Machine.", 10, 0
-    msg_purpose     db "We compute all your areas.", 10, 0
-
-    newline         db 10
+    prompt_number   db "Please enter a float number: ", 0
 
 section .bss
+    nice_number resb max_length
+
 section .text
 _start:
-    mov     rax, 1
-    mov     rdi, 1
-    mov     rsi, msg_welcome
-    mov     rdx, 46
-    syscall
+    mov     rdi, prompt_number
+    call    fputs
 
-    mov     rax, 1
-    mov     rdi, 1
-    mov     rsi, msg_purpose
-    mov     rdx, 27
-    syscall
+    mov     rdi, nice_number
+    mov     rsi, 10
+    call    fgets
+
+    mov     rdi, nice_number
+    call    atof
 
     mov        rax, 60
     mov        rdi, 0

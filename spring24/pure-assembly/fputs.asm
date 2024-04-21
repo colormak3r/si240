@@ -1,10 +1,10 @@
-global strlen
-max_length equ 1024
+global fputs
+extern strlen
 
 section .data
 section .bss
 section .text
-strlen:
+fputs:
     push    rbp
     mov     rbp, rsp
     push    rbx
@@ -25,20 +25,15 @@ strlen:
     ; Parameters
     mov     r15, rdi
 
-    xor     r14, r14
+    mov     rdi, r15
+    call    strlen
+    mov     r14, rax
 
-count:
-    cmp     byte[r15 + r14], 0
-    je      exit
-
-    inc     r14
-    cmp     r14, max_length
-    je      exit
-
-    jmp     count
-
-exit:
-    mov     rax, r14
+    mov     rax, 1
+    mov     rdi, 1
+    mov     rsi, r15
+    mov     rdx, r14
+    syscall
 
     popf          
     pop     r15
