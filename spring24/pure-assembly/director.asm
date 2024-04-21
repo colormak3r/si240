@@ -24,6 +24,7 @@ _start:
     mov     rdi, nice_number
     call    atof
 
+    ; Exit
     mov        rax, 60
     mov        rdi, 0
     syscall
