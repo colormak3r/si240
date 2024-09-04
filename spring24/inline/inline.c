@@ -1,3 +1,5 @@
+// Author: Khoa Nguyen
+
 #include "stdio.h"
 
 double temp;
