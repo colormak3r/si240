@@ -1,5 +1,5 @@
 
-extern isinteger
+global isinteger
 extern strlen
 extern printf
 
@@ -69,7 +69,7 @@ not_an_integer:
     ; Set the return to false
     mov     rax, -1                 ; I define -1 = false
     jmp     exit
-is_an_integer
+is_an_integer:
     ; Set the return to true
     mov     rax, 0                  ; I define 0 = true    
     jmp     exit                
