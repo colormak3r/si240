@@ -25,32 +25,29 @@
 ; For research purpose only. Please don't copy word for word. Avoid academic dishonesty.
 
 global isinteger
-extern strlen
-extern printf
-
+    extern strlen
+    extern printf
 segment .data
-
 segment .bss
-
 segment .text
 isinteger:
     ;15 pushes
-    push    rbp                     ;Backup rbp
-    mov     rbp,rsp                 ;The base pointer now points to top of stack
-    push    rdi                     ;Backup rdi
-    push    rsi                     ;Backup rsi
-    push    rdx                     ;Backup rdx
-    push    rcx                     ;Backup rcx
-    push    r8                      ;Backup r8
-    push    r9                      ;Backup r9
-    push    r10                     ;Backup r10
-    push    r11                     ;Backup r11
-    push    r12                     ;Backup r12
-    push    r13                     ;Backup r13
-    push    r14                     ;Backup r14
-    push    r15                     ;Backup r15
-    push    rbx                     ;Backup rbx
-    pushf                           ;Backup rflags
+    push    rbp                     ; Backup rbp
+    mov     rbp,rsp                 ; The base pointer now points to top of stack
+    push    rdi                     ; Backup rdi
+    push    rsi                     ; Backup rsi
+    push    rdx                     ; Backup rdx
+    push    rcx                     ; Backup rcx
+    push    r8                      ; Backup r8
+    push    r9                      ; Backup r9
+    push    r10                     ; Backup r10
+    push    r11                     ; Backup r11
+    push    r12                     ; Backup r12
+    push    r13                     ; Backup r13
+    push    r14                     ; Backup r14
+    push    r15                     ; Backup r15
+    push    rbx                     ; Backup rbx
+    pushf                           ; Backup rflags
 
     mov     r15, rdi                ; rdi contains the start of the array
     mov     r14, 1                  ; r14 is the index starting at 1
@@ -69,8 +66,8 @@ isinteger:
 
     ; Check if the first element is a digit, continue to the loop if it is
     mov     rdi, [r15]
-    call    is_digit
-    cmp     rax, 0
+    call    is_digit                ; The result is stored in rax
+    cmp     rax, false              ; false is defined in is_digit() below
     je      not_an_integer
 
 continue_validation:
@@ -83,7 +80,7 @@ continue_validation:
     call    is_digit
 
     ; If array[index] is not a digit, return false
-    cmp     rax, 0                  ; Assembly has no bolean; 0 = false, -1 = true as user defined in is_digit() below
+    cmp     rax, false              ; Assembly has no bolean; 0 = false, -1 = true as user defined in is_digit() below
     je      not_an_integer
 
     ; If array[index] is a digit, continue the loop
@@ -92,30 +89,31 @@ continue_validation:
 
 not_an_integer:
     ; Set the return to false
-    mov     rax, -1                 ; I define -1 = false
+    mov     rax, false       
     jmp     exit
+    
 is_an_integer:
     ; Set the return to true
-    mov     rax, 0                  ; I define 0 = true    
+    mov     rax, true    
     jmp     exit                
 
 exit:
     ;15 pop
-    popf                            ;Restore rflags
-    pop     rbx                     ;Restore rbx
-    pop     r15                     ;Restore r15
-    pop     r14                     ;Restore r14
-    pop     r13                     ;Restore r13
-    pop     r12                     ;Restore r12
-    pop     r11                     ;Restore r11
-    pop     r10                     ;Restore r10
-    pop     r9                      ;Restore r9
-    pop     r8                      ;Restore r8
-    pop     rcx                     ;Restore rcx
-    pop     rdx                     ;Restore rdx
-    pop     rsi                     ;Restore rsi
-    pop     rdi                     ;Restore rdi
-    pop     rbp                     ;Restore rbp
+    popf                            ; Restore rflags
+    pop     rbx                     ; Restore rbx
+    pop     r15                     ; Restore r15
+    pop     r14                     ; Restore r14
+    pop     r13                     ; Restore r13
+    pop     r12                     ; Restore r12
+    pop     r11                     ; Restore r11
+    pop     r10                     ; Restore r10
+    pop     r9                      ; Restore r9
+    pop     r8                      ; Restore r8
+    pop     rcx                     ; Restore rcx
+    pop     rdx                     ; Restore rdx
+    pop     rsi                     ; Restore rsi
+    pop     rdi                     ; Restore rdi
+    pop     rbp                     ; Restore rbp
 
     ret
 
