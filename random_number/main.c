@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 
 // Author information
 //   Author name : Code Goblin
@@ -22,22 +22,18 @@
 //   Author section: 240-99
 //   Author CWID : 000000000
 
-// For research purpose only. Please don't copy word for word. Avoid academic dishonesty.
+// For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
 #include <stdio.h>
 #include <math.h>
 
-extern double hsum(double[], int);
+extern void executive();
 
 int main(int argc, const char *argv[])
 {
-    printf("\nWelcome to Marvelous Arrays\n");
-    printf("Bought to you by Code Goblin\n");
-    
-    double nice_array[] = {2, 5, 4};
-    int count = 3;
-    double result = hsum(nice_array, count);
+    printf("\nWelcome to Random Number programmed by Code Goblin.\n");
 
-    printf("\nHsum = %lf\n", result);
-    printf("Main will return 0 to the operating system. Bye.\n");
+    executive();
+    
+    printf("\nAn integer zero will now be sent to the operating system. Bye\n");
 }
