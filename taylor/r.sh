@@ -36,7 +36,7 @@ echo "Compile the source file main.c"
 gcc  -m64 -Wall -no-pie -o main.o -std=c2x -c main.c
 
 echo "Link the object modules to create an executable file"
-gcc -m64 -no-pie -o learn.out taylor.o series.o main.o -std=c2x -Wall -z noexecstack -lm
+gcc -m64 -no-pie -o learn.out series.o taylor.o  main.o -std=c2x -Wall -z noexecstack -lm
 
 echo "Execute the program"
 chmod +x learn.out

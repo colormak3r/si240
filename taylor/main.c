@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // Author information
 //   Author name : Code Goblin
@@ -22,18 +22,25 @@
 //   Author section: 240-99
 //   Author CWID : 000000000
 
-// For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
+// For research purpose only. Please don't copy word for word. Avoid academic dishonesty.
 
 #include <stdio.h>
 #include <math.h>
 
-extern void series();
+extern unsigned long series();
 
 int main(int argc, const char *argv[])
 {
     printf("\nWelcome to Taylor Series programmed by Code Goblin.\n");
 
-    series();
-    
-    printf("\nAn integer zero will now be sent to the operating system. Bye\n");
+    unsigned long tics = series();
+
+    // Convert this code block into assembly and put it in series.asm
+    // Ask the user for cpu frequency instead of assuming it is 3Ghz
+    double cpufrequency = 3 * 1e9; // 3Ghz = 3 * 10^9 hz = 3 000 000 000 hz
+    double seconds = tics * 1 / cpufrequency;
+    double nanoseconds = seconds * 1e9; // 1 nanosecond = 1e9 seconds
+    printf("Elapsed nanoseconds = %lf", nanoseconds);
+
+    printf("\n\nAn integer zero will now be sent to the operating system. Bye\n");
 }

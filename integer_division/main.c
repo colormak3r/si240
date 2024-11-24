@@ -24,18 +24,16 @@
 
 // For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
-double taylor(double x, unsigned long n)
-{
-    double top = 1.0;
-    double bottom = 1.0;
-    double sum = 1.0;
+#include <stdio.h>
+#include <math.h>
 
-    for (int i = 1; i < n; i++)
-    {
-        top = top * x;
-        bottom = bottom * i;
-        sum += top/bottom;
-    }
+extern void executive();
+
+int main(int argc, const char *argv[])
+{
+    printf("\nWelcome to Review programmed by Code Goblin.\n");
+
+    executive();
     
-    return sum;
+    printf("\nAn integer zero will now be sent to the operating system. Bye\n");
 }

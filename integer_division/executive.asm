@@ -22,19 +22,16 @@
 ;   Author section: 240-99
 ;   Author CWID : 000000000
 
-global series
+global executive
 extern printf
-extern taylor
 
 segment .data
-    msg_output db "Taylor estimation = %lf", 10, 0
-    msg_tics db "Elapsed tics = %lu", 10, 0
-    num dq 17.55
-
+    msg_output db "Result = %d, remainder = %d", 10, 0
+    msg_debug db "num = %d", 10, 0
 segment .bss
 
 segment .text
-series:
+executive:
      ; Back up GPRs
     push    rbp
     mov     rbp, rsp
@@ -53,84 +50,24 @@ series:
     push    r15
     pushf
 
-    ; Get the starting time
-    call    gettime
-    mov     r15, rax
+    ; Signed division 20 by 10. Expect result = -2, remainder = 5
+    mov rax, 25
+    cqo              ; extend rax(64 bits) to rax:rdx (128 bits) See Chapter 7.5.4 Integer Division
+    mov rbx, -10
+    idiv rbx
 
-    ; Perform taylor series e^17.55 with 100 terms
-    movsd   xmm0, [num]
-    mov     rdi, 100
-    call    taylor          ; Result will be stored in xmm0
-    movsd   xmm15, xmm0     ; Move the result into a safer place
+    ; Move the result into a safe place
+    mov r15, rax
+    mov r14, rdx
 
-    ; Get the ending time
-    call    gettime
-    mov     r14, rax
-
-    ; Display the result of the taylor series
-    mov     rax, 1 
-    mov     rdi, msg_output
-    movsd   xmm0, xmm15
-    call    printf
-
-    ; Get the duration in tics
-    sub     r14, r15 
-
-    ; Display the tics
-    mov     rax, 0
-    mov     rdi, msg_tics
-    mov     rsi, r14
-    call    printf
-   
-    ; Return the tics to taylor.c
-    mov     rax, r14
+    ; Output the result
+    mov rax, 0
+    mov rdi, msg_output
+    mov rsi, r15
+    mov rdx, r14
+    call printf
 
     ;Restore the original values to the GPRs
-    popf          
-    pop     r15
-    pop     r14
-    pop     r13
-    pop     r12
-    pop     r11
-    pop     r10
-    pop     r9 
-    pop     r8 
-    pop     rdi
-    pop     rsi
-    pop     rdx
-    pop     rcx
-    pop     rbx
-    pop     rbp
-
-    ret
-
-; Function get time
-gettime:
-    ; Back up GPRs
-    push    rbp
-    mov     rbp, rsp
-    push    rbx
-    push    rcx
-    push    rdx
-    push    rsi
-    push    rdi
-    push    r8 
-    push    r9 
-    push    r10
-    push    r11
-    push    r12
-    push    r13
-    push    r14
-    push    r15
-    pushf
-
-    xor         rax, rax
-    xor         rdx, rdx
-    cpuid
-    rdtsc
-    shl         rdx, 32
-    or          rax, rdx
-
     popf          
     pop     r15
     pop     r14

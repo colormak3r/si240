@@ -30,6 +30,10 @@ segment .data
     msg_normalized db   "The normalized number is:  0x%016lx    %-18.13g", 10, 0
     pi dq 3.14
     msg_error db "Number is Nan", 10, 0
+    msg_secret_number db "My secret number is %d", 10, 0
+    msg_lucky_number db "My lucky number is %lf", 10, 0
+    long_array dq 123.123, 456.456, 789.789
+    number db "The number is %lf", 10, 0
 segment .bss
 
 segment .text
@@ -54,57 +58,33 @@ executive:
 
     ; Move 3.14 into xmm14
     movsd   xmm14, qword[pi]
-generate:
-    ; Generate a random number
-    rdrand  r15
 
-    ; Move the random number into xmm15 by pushing it onto the stack
-    push    r15             ; rsp will point to r15
-    movsd   xmm15, [rsp]    ; Dereference the value in rsp and move it into xmm15
-    pop     rbx             ; pop to balance the stack (every push must have a pop)
+    mov     r14, 42     ; My scecret number
 
-    ; Print out the random number in IEEE and scientific format
+    mov     rax, 0      ; We expect 0 float number
+    mov     rdi, msg_secret_number
+    mov     rsi, r14
+    call    printf
+
     mov     rax, 1
-    mov     rdi, msg_random
-    mov     rsi, r15
-    movsd   xmm0, xmm15
+    mov     rdi, msg_lucky_number
+    movsd   xmm0, xmm14
     call    printf
 
-    ; Compare the random number with a normal number
-    ucomisd xmm15, xmm14    ; Explaination: https://docs.google.com/document/d/1Xz_kpCSM-M7IfR7pOiEsMEpCTvgvU9VDLp1D5TSFcvg/edit?usp=sharing 
-    jp  error               ; Jump if parity
-
-    ; If the comparision is not parity, continue to normalize the random number
-    jmp normalize
-
-error:
-    ; Print out the error message if the random number is Nan
-    mov     rax, 0
-    mov     rdi, msg_error
-    call    printf
-
-    ; Rerun the loop until we get a valid random number
-    jmp     generate
-
-normalize:   
-    ; Normalize the random number
-    mov     r10, 0x000FFFFFFFFFFFFF
-    and     r15, r10
-    mov     r11, 0x3FF0000000000000
-    or      r15, r11
-
-    ; Move the normalized number into xmm15 by pushing it onto the stack
-    push    r15             ; rsp will point to r15
-    movsd   xmm15, [rsp]
-    pop     rbx
-
-    ; Print out the normalized number in IEEE and scientific format
+    xor     r15, r15 ; r15 is the counter
+loop:
     mov     rax, 1
-    mov     rdi, msg_normalized
-    mov     rsi, r15
-    movsd   xmm0, xmm15
+    mov     rdi, number
+    movsd   xmm0, [long_array + r15 * 8]
     call    printf
 
+    inc     r15
+    cmp     r15, 3
+    je      exit
+
+    jmp    loop
+
+exit
     ;Restore the original values to the GPRs
     popf          
     pop     r15

@@ -27,16 +27,16 @@
 # For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
 echo "Assemble the source file executive.asm"
-nasm -f elf64 -o executive.o executive.asm
+nasm -f elf64 -o executive.o executive.asm -gdwarf
 
 echo "Compile the source file main.c"
-gcc  -m64 -Wall -no-pie -o main.o -std=c2x -c main.c
+gcc  -m64 -Wall -no-pie -o main.o -std=c2x -c main.c -g
 
 echo "Link the object modules to create an executable file"
-gcc -m64 -no-pie -o learn.out executive.o main.o -std=c2x -Wall -z noexecstack -lm
+gcc -m64 -no-pie -o learn.out executive.o main.o -std=c2x -Wall -z noexecstack -lm -g
 
 echo "Execute the program"
 chmod +x learn.out
-./learn.out
+gdb learn.out
 
 echo "This bash script will now terminate."
