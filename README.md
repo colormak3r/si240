@@ -1,3 +1,5 @@
 # SI 240
 
-For research purposes only. Please don't copy word for word. Avoid academic dishonesty.
+Computer Organization and Assembly Programming Supplemental Instruction Materials
+Tuesday and Thursday 10:00am - 11:15am in Room GH333 
+
