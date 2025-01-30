@@ -25,7 +25,6 @@
 ; For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
 global makepizza
-extern ingredients
 
 segment .data
 
