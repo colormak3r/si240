@@ -37,7 +37,7 @@ int main()
     printf("\nLet's make some pizzaaaaaa!!\n\n");
 
     // Call assembly function makepizza
-    // makepizza();
+    makepizza();
 
     printf("\n\nPizza is ready!\n");
 
