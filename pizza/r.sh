@@ -29,15 +29,15 @@
 echo "Remove old executable files if there are any"
 rm *.out
 
-echo "Assemble the X86 file oven.asm"
-nasm -f elf64 -l oven.lis -o oven.o oven.asm
+echo "Assemble the X86 file oven.asm, output object file oven.o"
+nasm -f elf64 -o oven.o oven.asm
 
 # Note: We are using the C compiler gcc for this program
-echo "Compile the C file pizza.c"
+echo "Compile the C file pizza.c, output object file pizza.o"
 gcc -c -m64 -Wall -fno-pie -no-pie -o pizza.o pizza.c
 
-echo "Link the two 'O' files pizza.o oven.o"
-gcc -m64 -o go.out oven.o pizza.o -fno-pie -no-pie
+echo "Link the two object files pizza.o and oven.o, output executable file learn.out"
+gcc -m64 -Wall -fno-pie -no-pie -z noexecstack -lm -o learn.out oven.o pizza.o
 
-echo "Next the program ""Pizza"" will run"
-./go.out
+echo "Next the program "Pizza Oven" will run"
+./learn.out

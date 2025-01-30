@@ -25,55 +25,52 @@
 ; For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
 global makepizza
-global checkpassword
 extern ingredients
 
 segment .data
-    ing1 db "Peperonies",0
-    ing2 db "Pepper",0
-    ing3 db "Bacon",0
 
-segment.bss
+segment .bss
 
 segment .text
 makepizza:
+    ; Save the base pointer
     push    rbp
     mov     rbp, rsp
 
-    ;Pass paramenters
-    mov     rdi, 8
-    mov     rsi, ing1
-    mov     rdx, 16
-    mov     rcx, ing2
-    mov     r8, 200
-    mov     r9, ing3
-    call    ingredients
+    ; Save the general purpose registers
+    push    rbx
+    push    rcx
+    push    rdx
+    push    rsi
+    push    rdi
+    push    r8 
+    push    r9 
+    push    r10
+    push    r11
+    push    r12
+    push    r13
+    push    r14
+    push    r15
+    pushf
 
-    pop     rbp   
-    ret
+    ; Restore the general purpose registers
+    popf          
+    pop     r15
+    pop     r14
+    pop     r13
+    pop     r12
+    pop     r11
+    pop     r10
+    pop     r9 
+    pop     r8 
+    pop     rdi
+    pop     rsi
+    pop     rdx
+    pop     rcx
+    pop     rbx
 
-checkpassword:
-    push    rbp
-    mov     rbp, rsp
+    ; Restore the base pointer
+    pop     rbp
 
-    ; The password will stored be in rdi
-    ; For safety, move it into r10 - r15 in actual assignment
-
-    ; If the password == 7, jump to correct
-    cmp     rdi, 7
-    je      correct
-
-    ; Else, jump to incorrect
-    jmp     incorrect
-
-correct:
-    mov     rax, 1
-    jmp     exit
-
-incorrect:
-    mov     rax, -999
-    jmp     exit        ; You don't need this statement since the program will fall through exit function
-
-exit:
-    pop     rbp   
+    ; Return
     ret

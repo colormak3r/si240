@@ -27,35 +27,19 @@
 #include <stdio.h>
 
 extern void makepizza();
-extern int checkpassword(int password);
-extern void ingredients(
-    int count1, const char *ing1,
-    int count2, const char *ing2,
-    int count3, const char *ing3);
+extern void ingredients(int count1, const char *ing1,
+                        int count2, const char *ing2,
+                        int count3, const char *ing3,
+                        double price, double tax);
 
 int main()
 {
-    printf("Let's make some pizzaaaaaa\n");
+    printf("\nLet's make some pizzaaaaaa!!\n\n");
 
-    // ingredients(8,"Peperonies",6,"Pineapples",100,"Olives");
-    //  Call assembly function makepizza
-    makepizza();
+    // Call assembly function makepizza
+    // makepizza();
 
-    // Prompt the user for password
-    printf("Plase enter the password: ");
-    int password = -1;
-    scanf("%d", &password);
-
-    // Validate the password
-    int validate = checkpassword(password);
-    if (validate == 1)
-    {
-        printf("This is the best pizza ever!!!!\n");
-    }
-    else
-    {
-        printf("No pizza for you!!");
-    }
+    printf("\n\nPizza is ready!\n");
 
     return 0;
 }
@@ -63,9 +47,10 @@ int main()
 // A function to print a list of ingredients and its count
 void ingredients(int count1, const char *ing1,
                  int count2, const char *ing2,
-                 int count3, const char *ing3)
+                 int count3, const char *ing3,
+                 double price, double tax)
 {
-    printf("Ingredients:\n");
-    printf("%d %s\n%d %s\n%d %s\n", count1, ing1,
-           count2, ing2, count3, ing3);
+    double total = price + price * tax;
+    printf("Ingredients:\n%dx %s\n%dx %s\n%dx %s\nPrice: %lf\nTax: %lf\nTotal: %lf\n",
+           count1, ing1, count2, ing2, count3, ing3, price, tax, total);
 }

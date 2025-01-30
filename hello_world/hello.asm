@@ -35,7 +35,7 @@ segment .data
     output_hello db "Hello, World! My name is %s", 0
 
 segment .bss
-    name resb 50
+    name resb 50    ; Declare an array of 50 bytes to store the user's name
 
 segment .text
 hello_world:

@@ -30,10 +30,10 @@ echo "Assemble the source file executive.asm"
 nasm -f elf64 -o executive.o executive.asm
 
 echo "Compile the source file main.c"
-gcc  -m64 -Wall -no-pie -o main.o -std=c2x -c main.c
+gcc -c -m64 -Wall -fno-pie -no-pie -o -std=c2x  -o main.o-c main.c
 
 echo "Link the object modules to create an executable file"
-gcc -m64 -no-pie -o learn.out executive.o main.o -std=c2x -Wall -z noexecstack -lm
+gcc -m64 -Wall -fno-pie -no-pie -z noexecstack -lm -std=c2x -o learn.out executive.o main.o
 
 echo "Execute the program"
 chmod +x learn.out
