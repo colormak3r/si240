@@ -61,8 +61,11 @@ makepizza:
     ; Explaination: https://docs.google.com/presentation/d/1kl83m6gl5R_2KgwlaWPX8w6WPiz2-OGE9seDevfScIw/edit?usp=sharing
     ; Implement ingredients funciton call here
     ;mov     ?, ?
+    ;mov     ?, 5
     ;mov     ?, ingredient_1
+    ;mov     ?, 7
     ;mov     ?, ingredient_2
+    ;mov     ?, 3
     ;mov     ?, ingredient_3
     ;movsd   ?, price
     ;movsd   ?, tax
