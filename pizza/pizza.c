@@ -36,6 +36,9 @@ int main()
 {
     printf("\nLet's make some pizzaaaaaa!!\n\n");
 
+    // Call function ingredients
+    // ingredients(2, "flour", 1, "tomato", 1, "cheese", 10.0, 0.1);
+
     // Call assembly function makepizza
     makepizza();
 

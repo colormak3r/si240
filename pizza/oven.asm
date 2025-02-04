@@ -25,8 +25,14 @@
 ; For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
 
 global makepizza
+extern ingredients
 
 segment .data
+    ingredient_1 db "Tomato", 0
+    ingredient_2 db "Cheese", 0
+    ingredient_3 db "Pepperoni", 0
+    price dq 10.0
+    tax dq 0.08
 
 segment .bss
 
@@ -51,6 +57,16 @@ makepizza:
     push    r14
     push    r15
     pushf
+
+    ; Explaination: https://docs.google.com/presentation/d/1kl83m6gl5R_2KgwlaWPX8w6WPiz2-OGE9seDevfScIw/edit?usp=sharing
+    ; Implement ingredients funciton call here
+    ;mov     ?, ?
+    ;mov     ?, ingredient_1
+    ;mov     ?, ingredient_2
+    ;mov     ?, ingredient_3
+    ;movsd   ?, price
+    ;movsd   ?, tax
+    call ingredients
 
     ; Restore the general purpose registers
     popf          
