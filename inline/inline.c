@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 // Author information
 //   Author name : Code Goblin
@@ -22,25 +22,351 @@
 //   Author section: 240-99
 //   Author CWID : 000000000
 
-// For research purpose only. Please don't copy word for word. Avoid academic dishonesty. 
-
+// For research purpose only. Please don't copy word for word. Avoid academic dishonesty.
 
 #include "stdio.h"
 
-double temp;
+unsigned long getTimestamp();
+
+double num = 1.0;
 
 int main()
 {
-    printf("Welcome to a great program developed by Dang Khoa Nguyen at colormak3r@csu.fullerton.edu.\n");
-    double h;
-    asm("set default Intel");
-    asm("rdrand rdx");
-    asm("mov temp, rdx");
-    asm("set default ATT");
-    h = temp;
+    printf("Welcome to a great program developed by Code Goblin at instalock_caitlyn@bronze2.botlane.\n");
+
+    unsigned long start = getTimestamp();
+
+    // Calculate 2^100 in C
+    for (size_t i = 0; i < 100; i++)
+    {
+        num += num;
+    }
+
+    // Equivalent code block using inline assembly
+    // asm(".intel_syntax noprefix");
+    // // Implement your code block here
+    // asm(".att_syntax noprefix");
+
+    unsigned long end = getTimestamp();
+
     // Ending sequence
-    printf("Outout: %lf\n",h);
+    printf("Elapsed: %ld cycles\n", end - start);
+    printf("Outout: %lf\n", num);
     printf("A zero will be returned to the operating system. Bye\n");
 
     return 0;
 }
+
+unsigned long timestamp;
+unsigned long getTimestamp()
+{
+    asm(".intel_syntax noprefix");
+    asm("xor rax, rax");
+    asm("xor rdx, rdx");
+    asm("cpuid");
+    asm("rdtsc");
+    asm("shl rdx, 32");
+    asm("add rdx,rax");
+    asm("mov timestamp, rdx");
+    asm(".att_syntax noprefix");
+    return timestamp;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Calculate 2^100 using inline assembly
+// asm(".intel_syntax noprefix");
+// asm("xor r15, r15");
+// asm("movsd xmm0, num");
+// asm("movsd xmm1, num");
+// asm("startloop:");
+// asm("addsd xmm0, xmm1");
+// asm("movsd xmm1, xmm0");
+// asm("inc r15");
+// asm("cmp r15, 100");
+// asm("jl startloop");
+// asm("movsd num, xmm0");
+// asm(".att_syntax noprefix");
